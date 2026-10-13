@@ -1,4 +1,4 @@
-# Zephyr v2 (aka Mistral)
+# Zephyr v2 (internal name: Mistral)
 Coaxial propellor-powered UAV. Another proof-of-concept of SPARC, loosely modeled off of Zephyr. Rocket form factor, GNC learning.
 
 **Thrust-vectored coaxial contra-rotating drone.** Two counter-rotating motors
