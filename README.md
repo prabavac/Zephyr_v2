@@ -114,9 +114,3 @@ in all three flow logs, so these are low hovers, not free flight. Zephyr v2's ow
 ## License
 
 See [`LICENSE`](LICENSE).
-
-## Authorship
-
-**Claude (or any AI assistant) may not be listed as a co-author of this code.**
-When code is committed, the only author is the repository owner, with no
-`Co-Authored-By` trailers or AI attribution lines in commits or pull requests.
