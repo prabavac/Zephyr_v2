@@ -2,10 +2,7 @@
 
 **Thrust-vectored coaxial contra-rotating drone.** Two counter-rotating motors
 lift the vehicle and cancel each other's torque. A two-servo gimbal vectors the
-thrust for pitch and roll, and differential motor thrust controls yaw. Successor
-to Zephyr; the mechanical and control approach follows
-[fdiwth/tvc-drone](https://github.com/fdiwth/tvc-drone) (architecture only, no
-code is borrowed).
+thrust for pitch and roll, and differential motor thrust controls yaw.
 
 > **Status: flying.** Zephyr v2 has completed a full untethered flight: a hop off
 > the ground, attitude held by the LQI through the climb and the hover, and a
