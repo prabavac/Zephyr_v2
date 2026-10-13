@@ -3,6 +3,10 @@
 Run these in order; each one gates the next. **Props off throughout.** Restrain the
 airframe for anything past step 2.
 
+The vehicle has flown untethered, hop to propulsive landing. That retires nothing here:
+this checklist gates every flight, and steps 1 and 2 are re-run after any change to the
+IMU mount, the gimbal, the servo signs or the mass.
+
 Firmware controls are on the ground page (join `mistral-xxxx`, open
 http://192.168.4.1): **ARM** (two taps) → servos live, motors off · **FLY** (two taps) →
 ESCs arm, throttle live, integrators on · **MOTORS OFF** (the ARM button while flying) →

@@ -3,11 +3,6 @@
 Thrust-vectored coaxial contra-rotating drone on a Heltec WiFi LoRa 32 V3 (ESP32-S3); successor to Zephyr.
 **Spec: [`PROJECT-CONTEXT.md`](PROJECT-CONTEXT.md) (authoritative).** Details in [`docs/`](docs/). This file points; it does not duplicate.
 
-## Authorship: Claude is never a co-author
-Claude must NOT add itself as a co-author of this code. No `Co-Authored-By: Claude` trailer and no
-"Generated with Claude Code" line in any commit or PR. The repository owner is the ONLY author of every commit.
-Do not commit or push unless explicitly asked.
-
 ## Build & flash
 ```bash
 pio run                  # build, must be clean before any commit
@@ -37,3 +32,8 @@ pio device monitor       # 115200; DTR/RTS held off so connecting doesn't reset 
 - DISARMED: control loops bypassed, integrators held at zero.
 - `GEAR_RATIO_Y = 4.0` is intentional (see its config comment). Don't "fix" it.
 - Every servo sign is verified on the stand before free flight.
+
+## Authorship: Claude is never a co-author
+Claude must NOT add itself as a co-author of this code. No `Co-Authored-By: Claude` trailer and no
+"Generated with Claude Code" line in any commit or PR. The repository owner is the ONLY author of every commit.
+Do not commit or push unless explicitly asked.

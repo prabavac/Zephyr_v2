@@ -14,6 +14,12 @@ factor, built for GNC learning. It succeeds Zephyr (dual side-mount EDF).
 - **Pitch / roll:** thrust vectoring through a two-servo gimbal.
 - **Yaw:** differential thrust between the two motors. There is no yaw servo.
 
+**Flight status:** Mistral has flown untethered, hop to propulsive landing, with
+the LQI holding attitude and the throttle flown by hand. Nothing in sections 5
+and 6 relaxes because of that. The clamps, the arming gate, the servo-sign check
+and the bench checklist apply to every flight, and the open items in section 8
+are still open.
+
 ## 2. Reference design
 
 [fdiwth/tvc-drone](https://github.com/fdiwth/tvc-drone) (STM32F722, same DZP30

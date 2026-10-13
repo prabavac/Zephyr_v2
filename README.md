@@ -7,20 +7,23 @@ to Zephyr; the mechanical and control approach follows
 [fdiwth/tvc-drone](https://github.com/fdiwth/tvc-drone) (architecture only, no
 code is borrowed).
 
-> **Status: bench bring-up, not flying.** IMU (`imu`), attitude estimation
-> (`attitude`: complementary filter + Fusion AHRS), the 6-state LQI (`lqr`), the
-> DISARMED / ARMED / FLYING state machine, the TVC mixer, throttle and the WiFi
-> ground station are implemented. Bench checks are listed in
-> [`bench/VERIFY.md`](bench/VERIFY.md). The barometer, optical flow, translation
-> estimate and OLED display are still stubs.
+> **Status: flying.** Zephyr v2 has completed a full untethered flight: a hop off
+> the ground, attitude held by the LQI through the climb and the hover, and a
+> propulsive landing back down on its own thrust. No tether, no catch. Throttle
+> was commanded by hand from the ground page; the controller flew the attitude.
+> IMU (`imu`), attitude estimation (`attitude`: complementary filter + Fusion
+> AHRS), the 6-state LQI (`lqr`), the DISARMED / ARMED / FLYING state machine,
+> the TVC mixer, throttle and the WiFi ground station are implemented. The bench
+> checklist in [`bench/VERIFY.md`](bench/VERIFY.md) still gates every flight. The
+> barometer, optical flow, translation estimate and OLED display are still stubs,
+> so there is no altitude or position feedback: height and translation are the
+> pilot's job.
 
 The full vehicle spec is [`PROJECT-CONTEXT.md`](PROJECT-CONTEXT.md).
 
-## Authorship
-
-**Claude (or any AI assistant) may not be listed as a co-author of this code.**
-When code is committed, the only author is the repository owner, with no
-`Co-Authored-By` trailers or AI attribution lines in commits or pull requests.
+The internal name survives in the identifiers, which are code and hardware facts
+and stay as they are: `mistral_config.h`, the `mistral-` WiFi prefix, the
+`mistral.send()` console helper.
 
 ## Hardware
 
@@ -37,7 +40,7 @@ When code is committed, the only author is the repository owner, with no
 ## Project structure
 
 ```
-mistral/
+zephyr-v2/
 ├── platformio.ini          build config (remaps into firmware/)
 ├── PROJECT-CONTEXT.md      authoritative vehicle spec
 ├── firmware/
@@ -50,6 +53,7 @@ mistral/
 ├── web/                    index.html: ground-station page, embedded into the firmware
 ├── bench/                  VERIFY.md: ordered bench verification checklist
 └── docs/                   wiring diagram, actuators & comms, flight logs
+    └── flight_logs/zephyr/  Zephyr (v1) CSV logs, August 2026
 ```
 
 ## Build & flash
@@ -74,9 +78,30 @@ The vehicle hosts its own WiFi access point and serves the ground-station page:
 The page source is [`web/index.html`](web/index.html). The build embeds it into the
 firmware, so edit that file and reflash. There is no second copy to keep in sync.
 While joined to the AP you can also open the file straight from disk; it connects to
-192.168.4.1. It has the status bar, KILL, two-tap arm/disarm, the throttle slider and a
-nozzle readout; the remaining panels are specified in
-[`docs/actuators-comms.md`](docs/actuators-comms.md) §4.
+192.168.4.1. It has the flight-state bar, KILL, two-tap ARM and FLY, the throttle slider,
+Attitude with both estimators and Zero IMU, the Nozzle readout, the Console, the live graph
+stack, and Tuning for gains, servo trim and motor balance. Pack voltage, the
+artificial-horizon SVG and trim copy-to-clipboard are still design only, described in
+[`docs/actuators-comms.md`](docs/actuators-comms.md) §4. Record and Save write the flight to
+an `.xlsx` with one row per telemetry frame.
+
+## Flight logs
+
+Zephyr (v1), the EDF predecessor, flown in August 2026. These links download the file:
+
+| Log | Rows | Span | Contents |
+|-----|------|------|----------|
+| [`20260809-133551`](https://github.com/prabavac/Zephyr_v2/releases/download/logs-zephyr-2026-08/zephyr-flight-20260809-133551.csv) | 218 | 21.8 s | attitude only: IMU and nozzle pitch/roll |
+| [`20260816-204453`](https://github.com/prabavac/Zephyr_v2/releases/download/logs-zephyr-2026-08/zephyr-flight-20260816-204453.csv) | 291 | 29.1 s | adds flow counts, velocity, position, standoff, translation command |
+| [`20260817-193224`](https://github.com/prabavac/Zephyr_v2/releases/download/logs-zephyr-2026-08/zephyr-flight-20260817-193224.csv) | 252 | 25.3 s | as above plus flow surface quality |
+| [`20260817-193357`](https://github.com/prabavac/Zephyr_v2/releases/download/logs-zephyr-2026-08/zephyr-flight-20260817-193357.csv) | 166 | 16.6 s | as above plus flow surface quality |
+
+They are also in the tree under
+[`docs/flight_logs/zephyr/`](docs/flight_logs/zephyr/), and attached to the
+[`logs-zephyr-2026-08`](https://github.com/prabavac/Zephyr_v2/releases/tag/logs-zephyr-2026-08)
+release, which is where the download links point. Standoff holds between 0.16 and 0.24 m
+in all three flow logs, so these are low hovers, not free flight. Zephyr v2's own logs are
+`.xlsx` from the Record button and are not published yet.
 
 ## Safety
 
@@ -89,3 +114,9 @@ nozzle readout; the remaining panels are specified in
 ## License
 
 See [`LICENSE`](LICENSE).
+
+## Authorship
+
+**Claude (or any AI assistant) may not be listed as a co-author of this code.**
+When code is committed, the only author is the repository owner, with no
+`Co-Authored-By` trailers or AI attribution lines in commits or pull requests.

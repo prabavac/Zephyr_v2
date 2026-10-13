@@ -316,9 +316,13 @@ into that. Rules (the first three carried over from Zephyr's page):
 
 ## 4. Ground station web UI
 
-**Built so far (bench bring-up):** status bar, KILL, arm/disarm, throttle, and a nozzle
-readout for the bench sweep. Everything else in this section is still design only; it
-is here so the WebSocket message schema is designed with the final UI in mind.
+**Built so far:** flight-state bar with uptime and link, KILL, two-tap ARM and FLY,
+throttle slider, Attitude (both estimators side by side, plus Zero IMU), Nozzle readout,
+Console, the live graph stack, and Tuning (live gain scales, servo trim, motor balance).
+This is the page that flew the untethered hop and propulsive landing. Still design only:
+pack voltage in the status bar, the artificial-horizon SVG, and the trim
+copy-to-clipboard-as-config button. Those parts are kept here so the WebSocket message
+schema stays designed with the final UI in mind.
 
 ### Layout
 
